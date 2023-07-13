@@ -19,6 +19,9 @@ from django.utils.decorators import method_decorator
 from datetime import datetime
 from django.views.decorators.cache import never_cache
 from django.views import View
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+
 
 
 
@@ -34,24 +37,29 @@ def SignupPage(request):
         pass2=request.POST.get('password2')
         first_name=request.POST.get('first_name')
         last_name=request.POST.get('last_name')
+        if(uname!='' and email!='' and pass1!='' and pass2!='' and pass2!='' and first_name!='' and last_name!=''):
+            try:
+                validate_password(pass1)
+            except ValidationError as validation_error:
+                error_message = validation_error.messages[0]
+                return render(request,'signup.html',{'error': error_message})
 
-        if pass1!=pass2:
-            return render(request,'signup.html',{'error':'Passwords did not match'})
-        else:
-            if(User.objects.filter(username = uname).count() == 0):
-                my_user=User.objects.create_user(
-                    uname,
-                    email=email,
-                    password=pass1,
-                    first_name=first_name,
-                    last_name=last_name)
-                my_user.save()
-                return redirect('login')
+            if pass1!=pass2:
+                return render(request,'signup.html',{'error':'Passwords did not match'})
             else:
-                return render(request,'signup.html',{'error':'Username already exists'})
-
-
-
+                if(User.objects.filter(username = uname).count() == 0):
+                    my_user=User.objects.create_user(
+                        uname,
+                        email=email,
+                        password=pass1,
+                        first_name=first_name,
+                        last_name=last_name)
+                    my_user.save()
+                    return redirect('login')
+                else:
+                    return render(request,'signup.html',{'error':'Username already exists'})
+        else:
+            return render(request,'signup.html',{'error':'Fill all the required fields'})
     return render(request,'signup.html')
 
 @cache_control(no_cache=True, must_revalidate=True,no_store=True)

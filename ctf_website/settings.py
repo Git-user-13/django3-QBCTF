@@ -28,6 +28,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['qctf.pythonanywhere.com']
 
+SESSION_COOKIE_AGE = 36000
+
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Application definition
 
@@ -130,3 +133,10 @@ try:
     from .local_settings import *
 except ImportError:
     print("Looks kike no local file")
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'qctf666@gmail.com'
+EMAIL_HOST_PASSWORD = 'dqvnvbbuwrmluwle'

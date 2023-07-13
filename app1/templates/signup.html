@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Signup Page</title>
+    <title>Signup</title>
     {% load static %}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="{% static 'app1/1542766.png' %}"/>
@@ -54,14 +54,14 @@ body{
 } */
 form{
     min-height: 520px;
-    margin-top: 30px;
-    width: 450px;
+    margin-top: 5px;
+    width: 600px;
     border-radius: 30px;
     /* background-color: rgba(255,255,255,0.13); */
     background: #191919;
     position: absolute;
     transform: translate(-50%,-50%);
-    top: 50%;
+    top: 68%;
     left: 50%;
     /* border-radius: 10px; */
     backdrop-filter: blur(10px);
@@ -88,7 +88,7 @@ form h3{
 form h4{
     font-size: 20px;
     font-weight: 100;
-    line-height: 85px;
+    line-height: 25px;
     text-align: center;
     color: red;
 }
@@ -103,6 +103,7 @@ input{
     display: block;
     height: 50px;
     width: 100%;
+    /* width: 300px; */
     /* background-color: rgba(255,255,255,0.07); */
     background-color: #191919;
     border-radius: 15px;
@@ -171,8 +172,21 @@ span{
 }
 
 .outside{
-    margin-top: 35px;
+    margin-top: 65px;
 }
+
+ul{
+    margin-top: 8px;
+    margin-left: 12px;
+    margin-bottom: -20px;
+}
+
+/* .side{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+} */
 
     </style>
 </head>
@@ -188,24 +202,42 @@ span{
         {% csrf_token %} 
         <h3>Signup</h3>
 
-        <label for="first_name">First Name</label>
-        <input type="text" placeholder="first_name" name="first_name" id="first_name">
+        <div class="side">
 
-        <label for="last_name">Last Name</label>
-        <input type="text" placeholder="last_name" name="last_name" id="last_name">
+            <label for="first_name">First Name</label>
+            <input type="text" placeholder="first_name" name="first_name" id="first_name" required>
 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Username" name="username" id="username">
+            <label for="last_name">Last Name</label>
+            <input type="text" placeholder="last_name" name="last_name" id="last_name" required>
 
-        <label for="email">Email</label>
-        <input type="email" placeholder="Email" name="email" id="email">
+        </div>
 
-        <label for="password1">Password</label>
-        <input type="password" placeholder="Password" id="password1" name="password1">
+        <div class="side">
+
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" name="username" id="username" required>
+
+            <label for="email">Email</label>
+            <input type="email" placeholder="Email" name="email" id="email" required>
+
+        </div>
+
+        <div class="side">
+
+            <label for="password1">Password</label>
+            <input type="password" placeholder="Password" id="password1" name="password1" required>
+            <!-- <ul>
+                <li>Should be atleast 8 characters long</li>
+                <li>Should contain a uppercase character</li>
+                <li>Should contain a special character</li>
+                <li>Should contain a number</li>
+            </ul> -->
 
 
-        <label for="password2">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" id="password2" name="password2">
+            <label for="password2">Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
+
+        </div>
         <button type="submit">Signup</button>
 
         <a href="{% url 'login' %}"> I already have a account</a>

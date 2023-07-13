@@ -1,4 +1,35 @@
 
+<script>
+    // Add an entry to the browser's history
+    var variable = "{{token}}"
+    if (variable!=""){
+    window.history.pushState(null, '', window.location.href);
+
+    // window.onpopstate = () => setTimeout(alert.bind(window, "Pop"), 0);
+    
+    
+        // Listen for the back button click event
+        window.addEventListener('popstate', function(event) {
+            // Redirect the user to the page before the update page
+            window.location.href = '/quest/' + variable + '/';
+            // window.location.href = '/showQuests/';
+        
+    });
+    
+}
+// }
+        // window.onpageshow = function(event) {
+        //     // Check if the page is loaded from the bfcache (back-forward cache)
+        //     if (event.persisted) {
+        //         // Reload the page
+        //         window.location.reload(true);
+        //     }
+        // };
+
+        
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,20 +68,23 @@
 
 <body>
     <script>
-        // Add an entry to the browser's history
-        var variable = "{{token}}"
-        if (variable!=""){
-        window.history.pushState(null, '', window.location.href);
+    //     // Add an entry to the browser's history
+    //     var variable = "{{token}}"
+    //     if (variable!=""){
+    //     window.history.pushState(null, '', window.location.href);
+
+    //     // window.onpopstate = () => setTimeout(alert.bind(window, "Pop"), 0);
         
         
-            // Listen for the back button click event
-            window.addEventListener('popstate', function(event) {
-                // Redirect the user to the page before the update page
-                window.location.href = '/quest/' + variable + '/';
-                // window.location.href = '/showQuests/';
+    //         // Listen for the back button click event
+    //         window.addEventListener('popstate', function(event) {
+    //             // Redirect the user to the page before the update page
+    //             window.location.href = '/quest/' + variable + '/';
+    //             // window.location.href = '/showQuests/';
             
-        });
-    }
+    //     });
+        
+    // }
     // }
             // window.onpageshow = function(event) {
             //     // Check if the page is loaded from the bfcache (back-forward cache)
@@ -59,6 +93,14 @@
             //         window.location.reload(true);
             //     }
             // };
+
+            // var value = document.getElementById('flag').value;
+            // if ( "{{completed.hint.f1}}" != value) {
+            //     alert(value);
+            // } else {
+                
+            // }
+            
 
             
     </script>
@@ -142,7 +184,7 @@
                         <!-- {{ form.as_p }} -->
                         <div class="boxx">HINT: {{ hints.h1 }}</div>
                         <!-- <label for="flag" class="boxx">Hint</label> -->
-                        <input type="text" placeholder="Enter the flag" id="flag" name="flag" class="boxk">
+                        <input type="text" placeholder="Enter the flag" id="flag" name="flag" class="boxk" maxlength="25">
                         <!-- <lo class="boxx" id="description">{{ form.description }}</lo> -->
                         <!-- <input type="submit" name="Submit" class="touch"> Submit -->
                         <button type="submit" class="touched">Submit</button>
